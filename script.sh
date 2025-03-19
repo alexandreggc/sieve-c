@@ -11,7 +11,7 @@ done
 
 # Array of different compiler flags
 compiler_flags=(
-    "-O0" 
+    # "-O0" 
     # "-O1" 
     # "-O2" 
     "-O3" 

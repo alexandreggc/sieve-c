@@ -90,32 +90,32 @@ int main(int argc, char *argv[]) {
     unsigned long long n = strtoull(argv[1], NULL, 10);
     int iterations = 5;
 
-    clock_t startTime, endTime;
+    double startTime, endTime;
     double timeTaken;
     unsigned long long result;
 
     double execTimes[iterations];
     for (int i=0; i< iterations; i++) {
-        startTime = clock();
+        startTime = omp_get_wtime();
         result = sieveSequential(n);
-        endTime = clock();
-        timeTaken = ((double)(endTime - startTime)) / CLOCKS_PER_SEC;
+        endTime = omp_get_wtime();
+        timeTaken = ((double)(endTime - startTime));
         execTimes[i] = timeTaken;
-        printf("Sequential Time: %f seconds, N primes: %llu\n", timeTaken, result);
+        printf("Sequential Time: %lf seconds, N primes: %llu\n", timeTaken, result);
     }
     double avgTime1 = (execTimes[2] + execTimes[3] + execTimes[4]) / 3;
 
-    printf("Average Sequential Time: %f seconds\n", (execTimes[0] + execTimes[1] + execTimes[2] + execTimes[3] + execTimes[4]) / 5);
+    printf("Average Sequential Time: %lf seconds\n", (execTimes[0] + execTimes[1] + execTimes[2] + execTimes[3] + execTimes[4]) / 5);
 
     for (int i=0; i< iterations; i++) {
-        startTime = clock();
+        startTime = omp_get_wtime();
         result = sieveParallel(n);
-        endTime = clock();
-        timeTaken = ((double)(endTime - startTime)) / CLOCKS_PER_SEC;
+        endTime = omp_get_wtime();
+        timeTaken = ((double)(endTime - startTime));
         execTimes[i] = timeTaken;
-        printf("Parallel Time: %f seconds, N primes: %llu\n", timeTaken, result);
+        printf("Parallel Time: %lf seconds, N primes: %llu\n", timeTaken, result);
     }
-    printf("Average Parallel Time: %f seconds\n", (execTimes[0] + execTimes[1] + execTimes[2] + execTimes[3] + execTimes[4]) / 5);
+    printf("Average Parallel Time: %lf seconds\n", (execTimes[0] + execTimes[1] + execTimes[2] + execTimes[3] + execTimes[4]) / 5);
     double avgTime2 = (execTimes[2] + execTimes[3] + execTimes[4]) / 3;
 
     printf("Speedup: %f\n", avgTime1 / avgTime2);
