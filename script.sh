@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compile the program
-gcc -fopenmp -o sieve test.c
+gcc -fopenmp -o sieve test.c -lm
 
 # Array of different n values
 n_values=()
@@ -23,7 +23,7 @@ for n in "${n_values[@]}"; do
   echo ""
   for flag in "${compiler_flags[@]}"; do
     echo "Running with n=$n and flag=$flag"
-    gcc -fopenmp $flag -o sieve test.c
+    gcc -fopenmp $flag -o sieve test.c -lm
     ./sieve $n
     echo ""
   done
