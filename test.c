@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
     }
 
     unsigned long long n = strtoull(argv[1], NULL, 10);
-    int iterations = 3;
+    int iterations = 5;
 
     clock_t startTime, endTime;
     double timeTaken;
